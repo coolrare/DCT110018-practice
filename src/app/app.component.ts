@@ -1,7 +1,8 @@
 import { ArticlesService } from './articles.service';
 import { Component, OnInit } from '@angular/core';
 import { Article } from './article';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,15 @@ export class AppComponent implements OnInit {
   // }
   list: Article[] = [];
 
-  list$ = this.articlesService.getArticle();
+  keyword$ = new BehaviorSubject<string>('');
+
+  list$ = this.keyword$.pipe(
+    switchMap((keyword) =>
+      keyword === ''
+        ? this.articlesService.getArticle()
+        : this.articlesService.queryArticle(keyword)
+    )
+  );
 
   constructor(private articlesService: ArticlesService) {}
 
@@ -40,9 +49,11 @@ export class AppComponent implements OnInit {
   }
 
   filterArticles(keyword: string) {
+    this.keyword$.next(keyword);
     // this.articlesService.filterArticles(keyword);
-    this.articlesService.queryArticle(keyword).subscribe(articles => {
-      this.list = articles
-    })
+    // this.articlesService.queryArticle(keyword).subscribe(articles => {
+    //   this.list = articles
+    // })
   }
 }
+
