@@ -1,23 +1,28 @@
 <nav class="navbar navbar-light">
   <div class="container">
-    <a class="navbar-brand"
-      [class.highlight]="isHighlight"
-      [style.font-size.px]="fontSize"
+    <a class="navbar-brand" [class.highlight]="isHighlight" [style.font-size.px]="fontSize"
       href="index.html">conduit</a>
 
     <!-- <a class="navbar-brand"
       [class]="{ highlight: isHighlight, demo: true, demo2: false }"
       [style]="{ 'font-size': fontSize + '.px' }"
       href="index.html">conduit</a> -->
-    <input
-      [(ngModel)]="keyword"
-      class="form-control form-control-sm search-input"
-      type="text" placeholder="Keyword" (keyup.enter)="keyEnterUp()">
+    <input [(ngModel)]="keyword" class="form-control form-control-sm search-input" type="text" placeholder="Keyword"
+      (keyup.enter)="keyEnterUp()">
     <button class="btn btn-sm btn-primary" (click)="buttonClick($event)">
       <i class="ion-search"></i>
     </button>
     <!-- {{ keyword }} -->
 
-    <span class="highlight" *ngIf="keyword === ''">請輸入查詢條件</span>
+    <span class="highlight">
+      <ng-container *ngIf="keyword === ''; then noKeyword; else searchKeyword"></ng-container>
+      <ng-template #noKeyword>
+        請輸入查詢條件
+      </ng-template>
+      <ng-template #searchKeyword>
+        輸入內容為: {{ keyword }}
+      </ng-template>
+    </span>
+
   </div>
 </nav>
