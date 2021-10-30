@@ -1,3 +1,4 @@
+import { Article } from './../article';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./articles.component.css'],
 })
 export class ArticlesComponent implements OnInit {
-  @Input() list: any[] = [];
+  @Input() list: Article[] = [];
 
   constructor() {}
 

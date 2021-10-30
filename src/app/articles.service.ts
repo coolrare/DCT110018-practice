@@ -1,11 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Article } from './article';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ArticlesService {
-
-  originalList = [
+  originalList: Article[] = [
     {
       title:
         'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
@@ -65,7 +66,17 @@ export class ArticlesService {
 
   list = this.originalList;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) {}
+
+  getArticle() {
+    return this.httpClient.get<Article[]>('http://localhost:3000/articles');
+  }
+
+  queryArticle(keyowrd: string) {
+    return this.httpClient.get<Article[]>(
+      `http://localhost:3000/articles?q=${keyowrd}`
+    );
+  }
 
   filterArticles(keyword: string) {
     this.list = this.originalList.filter(
