@@ -7,12 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   keyword = 'test';
+  isHighlight = false;
+  fontSize = 12;
 
   constructor() {}
 
   ngOnInit(): void {}
 
   buttonClick(event: MouseEvent) {
+    this.isHighlight = !this.isHighlight;
+    this.fontSize += 2;
     console.log(event);
     this.doSearch();
   }
