@@ -1,6 +1,7 @@
 import { ArticlesService } from './articles.service';
 import { Component, OnInit } from '@angular/core';
 import { Article } from './article';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -28,12 +29,14 @@ export class AppComponent implements OnInit {
   // }
   list: Article[] = [];
 
+  list$ = this.articlesService.getArticle();
+
   constructor(private articlesService: ArticlesService) {}
 
   ngOnInit() {
-    this.articlesService.getArticle().subscribe((articles) => {
-      this.list = articles;
-    });
+    // this.articlesService.getArticle().subscribe((articles) => {
+    //   this.list = articles;
+    // });
   }
 
   filterArticles(keyword: string) {
