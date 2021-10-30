@@ -83,4 +83,8 @@ export class ArticlesService {
       (article) => article.title.indexOf(keyword) !== -1
     );
   }
+
+  getArticlesByKeyword(articles: Article[], keyword: string) {
+    return articles.filter((article) => article.title.indexOf(keyword) !== -1);
+  }
 }

@@ -30,15 +30,17 @@ export class AppComponent implements OnInit {
   // }
   list: Article[] = [];
 
+  list$ = this.articlesService.getArticle();
+
   keyword$ = new BehaviorSubject<string>('');
 
-  list$ = this.keyword$.pipe(
-    switchMap((keyword) =>
-      keyword === ''
-        ? this.articlesService.getArticle()
-        : this.articlesService.queryArticle(keyword)
-    )
-  );
+  // list$ = this.keyword$.pipe(
+  //   switchMap((keyword) =>
+  //     keyword === ''
+  //       ? this.articlesService.getArticle()
+  //       : this.articlesService.queryArticle(keyword)
+  //   )
+  // );
 
   constructor(private articlesService: ArticlesService) {}
 
@@ -49,6 +51,7 @@ export class AppComponent implements OnInit {
   }
 
   filterArticles(keyword: string) {
+    this.keyword = keyword;
     this.keyword$.next(keyword);
     // this.articlesService.filterArticles(keyword);
     // this.articlesService.queryArticle(keyword).subscribe(articles => {

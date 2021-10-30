@@ -15,7 +15,7 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-9">
-        <app-articles [list]="(list$ | async) || []"></app-articles>
+        <app-articles [list]="(list$ | async) || [] | filterArticle:keyword"></app-articles>
 
         <!-- <app-articles [list]="list2"></app-articles> -->
       </div>
