@@ -1,14 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() searchByKeyword = new EventEmitter<string>();
+  @Input() keyword = '';
+  @Output() keywordChange = new EventEmitter<string>();
 
-  keyword = 'test';
   isHighlight = false;
   fontSize = 12;
 
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   doSearch() {
     // this.keyword += '!';
-    this.searchByKeyword.emit(this.keyword);
+    this.keywordChange.emit(this.keyword);
     console.log('search');
   }
 

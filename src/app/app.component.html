@@ -1,4 +1,6 @@
-<app-header (searchByKeyword)="filterArticles($event)"></app-header>
+<app-header
+  [(keyword)]="keyword"
+  (keywordChange)="filterArticles($event)"></app-header>
 
 <div class="home-page">
 
@@ -6,6 +8,7 @@
     <div class="container">
       <h1 class="logo-font" [title]="title">{{ title }}</h1>
       <p [innerHTML]="sbutitle"></p>
+      <p>{{ keyword }}</p>
     </div>
   </div>
 

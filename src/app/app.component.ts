@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'conduitxxxx';
   sbutitle = 'A place to share your <u>knowledge</u>.';
+  keyword = 'test';
 
   originalList = [
     {
